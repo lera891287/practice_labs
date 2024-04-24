@@ -1,0 +1,18 @@
+models:
+  Students:
+    name: string:400
+    relationships:
+      belongsToMany: Enducations
+      belongsTo: Groups
+
+  Groups:
+    name_group: string:400
+    number: string:100
+    relationships:
+      hasMany: Students
+
+  Enducations:
+    name_disciplins: string:400
+    relationships:
+      belongsToMany: Students
+
