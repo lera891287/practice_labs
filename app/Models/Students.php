@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Models\Students
@@ -52,4 +54,12 @@ class Students extends Model
     {
         return $this->belongsTo(Groups::class, 'groups_id','id');
     }
+    public function studentsEn(): HasOne
+    {
+        return $this->hasOne(EnducationsStudents::class);
+    }
+//    public function studentsEn(): HasOne
+//    {
+//        return $this->hasOne(EnducationsStudents::class);
+//    }
 }

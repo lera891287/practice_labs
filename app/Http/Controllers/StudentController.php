@@ -17,7 +17,7 @@ class StudentController extends Controller
         return view('pages.AllStudents', compact('students'));
     }
 
-    public function StudentList(Request $request)
+    public function StudentList()
     {
         $stEn = [];
 
@@ -26,11 +26,20 @@ class StudentController extends Controller
             $stEn[] = [$student->name,  $student->enducations()->get()->map(function (Enducations $enducation) {
                 return [
                     'disciplina' => $enducation->name_disciplins,
-                    'grad' => $enducation->studentsEn->grad,
+
                 ];
             })];
         }
-        return view('pages.index', compact('students', 'stEn', 'request'));
+        $stEnn =[];
+        foreach ($students as $student) {
+            $stEnn[] = [$student->name, $student->studentsEn()->get()->map(function (EnducationsStudents $enducationsStudents) {
+                return [
+                    'grad' => $enducationsStudents->grad,
+                ];
+            })];
+        }
+
+        return view('pages.index', compact('students', 'stEn','stEnn'));
 
     }
 
@@ -94,11 +103,23 @@ class StudentController extends Controller
         }
 
         EnducationsStudents::create([
-            'enducations_id' => Enducations::whereNameDisciplins($request->name_disciplins)->first()->id,
             'students_id' => Students::whereName($request->name)->first()->id,
             'grad' => $request->grad,
+            'enducations_id' => Enducations::whereNameDisciplins($request->name_disciplins)->first()->id,
+
         ]);
 
+        return redirect('http://localhost/marks');
+    }
+    public function editGrad()
+    {
+        $grad=EnducationsStudents::all();
+        return view('pages.edit', compact('grad'));
+    }
+    public function updateGrad(Request $request,$id)
+    {
+        $request->validate(['grad'=>'required']);
+        EnducationsStudents::find($id)->update($request->all());
         return redirect('http://localhost/marks');
     }
 

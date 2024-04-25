@@ -3,46 +3,67 @@
 @section('content')
 
 
-    <h1>Группа номер </h1>
+    <h1>Рейтинг студентов </h1>
 
 
     <div style="margin-top: 100px">
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
+        <div class="table-container">
+            <table class="table mt-5">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Фамилия</th>
 
-                <th scope="col">имя студента</th>
-                <th scope="col">название предмета</th>
-                <th scope="col">оценка</th>
+                    <th scope="col">Предмет</th>
 
 
-            </tr>
-            </thead>
+                </tr>
+                </thead>
 
-            <tbody>
+                @foreach($stEn as $student)
+                    @foreach($student[1] as $dis)
 
-            @foreach($stEn as $student)
-                @foreach($student[1] as $dis)
+                        <tr>
+                            <td scope="col">
+                                {{ $student[0]}}
+                            </td>
+                            <td scope="col">
+                                {{ $dis['disciplina'] }}
+                            </td>
 
-                    <tr>
-                        <td scope="col">
-                            {{ $student[0]}}
-                        </td>
-                        <td scope="col">
-                            {{ $dis['disciplina'] }}
-                        </td>
-                        <td scope="col">
-                            {{ $dis['grad'] }}
-                        </td>
-                    </tr>
+                        </tr>
+
+                    @endforeach
                 @endforeach
-            @endforeach
+            </table>
 
-            </tbody>
-        </table>
+            <table class="table mt-5" >
+                <thead class="thead-dark">
+                <tr>
 
-        {{--<a href="{{route('create_enducations') }}" class="btn btn-secondary"> Создать </a>--}}
-    </div>
+                    <th scope="col">Оценка</th>
+
+                </tr>
+                </thead>
+                @foreach($stEnn as $student)
+                    @foreach($student[1] as $dis)
+
+                        <tr>
+                            <td scope="col" style="display: none;">
+                                {{ $student[0]}}
+                            </td>
+                            <td colspan="2">
+                                {{ $dis['grad'] }}
+
+                            </td>
+
+                        </tr>
+
+
+                    @endforeach
+
+                @endforeach
+            </table>
+        </div>
 
 
 
@@ -68,6 +89,13 @@
             color: #92afd1;
             font-size: 18px;
             margin-left: 20px;
+        }
+        .table-container {
+            display: flex;
+        }
+
+        .table-container table {
+            margin-right: 10px;
         }
     </style>
 @endpush

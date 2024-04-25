@@ -29,9 +29,23 @@
                     </td>
                 </tr>
             @endforeach
+            <tr>
+                <td>
+
+                    <form method="POST" action="{{route('enducation.edit', $enducation->id)  }}">
+
+                        @csrf()
+
+                        <a href="{{route('enducation.edit', $enducation->id) }}" class="btn btn-secondary" > Изменить данные</a>
+                    </form>
+
+                    <a href="{{route('create_enducations') }}" class="btn btn-secondary"> Создать </a>
+                </td>
+
+            </tr>
         </table>
 
-        <a href="{{route('create_enducations') }}" class="btn btn-secondary"> Создать </a>
+
     </div>
 
 

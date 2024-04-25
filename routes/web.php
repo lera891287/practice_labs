@@ -47,3 +47,6 @@ Route::put('/editGroup/{group_id}', [\App\Http\Controllers\GroupController::clas
 Route::get('/editStudent/{student_id}', [\App\Http\Controllers\StudentController::class, 'editStudent'])->name('student.edit');
 Route::put('/editStudent/{student_id}', [\App\Http\Controllers\StudentController::class, 'updateStudent'])->name('student.update');
 
+Route::get('/editEnducations/{enducation_id}', [\App\Http\Controllers\EnducationsController::class, 'editEnducation'])->name('enducation.edit');
+Route::put('/editEnducations/{enducation_id}', [\App\Http\Controllers\EnducationsController::class, 'updateEnducation'])->name('enducation.update');
+

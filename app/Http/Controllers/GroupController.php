@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enducations;
+use App\Models\EnducationsStudents;
 use App\Models\Groups;
 use App\Models\Students;
 use Illuminate\Http\Request;
@@ -17,15 +18,22 @@ class GroupController extends Controller
 
         $stEn = [];
         foreach ($students as $student) {
-            $stEn[] = [$student->name, $student->enducations()->get()->map(function (Enducations $enducation) {
+            $stEn[] = [$student->name,  $student->enducations()->get()->map(function (Enducations $enducation) {
                 return [
                     'disciplina' => $enducation->name_disciplins,
-                    'grad' => $enducation->studentsEn->grad,
+
                 ];
             })];
         }
-        /*dd($stEn);*/
-        return view('pages.AllRating', compact('students', 'stEn', 'request'));
+        $stEnn =[];
+        foreach ($students as $student) {
+            $stEnn[] = [$student->name, $student->studentsEn()->get()->map(function (EnducationsStudents $enducationsStudents) {
+                return [
+                    'grad' => $enducationsStudents->grad,
+                ];
+            })];
+        }
+        return view('pages.AllRating', compact('students', 'stEn', 'stEnn','request'));
     }
     public function updateGroup(Request $request, $id)
     {

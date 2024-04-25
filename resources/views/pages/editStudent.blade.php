@@ -11,44 +11,54 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
 
-                <div class="form-area">
 
-                    @foreach($students as $student)
-                        <td>
-                            {{ $student -> name}}
-                        </td>
-                        <td>{{ $student->groups?->name_group}}</td>
-                        <form method="POST" action="{{ route('student.edit', $student->id) }}">
+                    <table class="table">
+                        <thead class="thead-dark">
 
-                            @csrf
+                        </thead>
+                        <tr>
 
-                            <div class="row">
-                                <div class="col-md-3" style="width: 300px" >
-                                    <label for="name">Имя студента</label>
-                                    <input type="text" class="form-control" name="name" style="width: 100%; margin-top: 5px; height: 38px; padding: 6px 12px;">
-                                </div>
-{{--                                <div class="col-md-3" style="width: 300px" >--}}
-{{--                                    <label for="name_group">Группа</label>--}}
-{{--                                    <input type="text" class="form-control" name="name_group" style="width: 100%; margin-top: 5px; height: 38px; padding: 6px 12px;">--}}
+                            <th>Имя студента</th>
 
-{{--                                </div>--}}
-
-                            </div>
+                            <th>Группа</th>
+                            <th>Изменить имя студента</th>
 
 
-                            <form method="POST" action="{{route('student.update', $student->id)}}">
+                        </tr>
+                        @foreach($students as $student)
 
+                            <form method="POST" action="{{ route('student.edit', $student->id) }}">
                                 @csrf
-                                @method('PUT')
 
-                                <button type="submit">Добавить</button>
+                                <tr>
+                                   <td> {{ $student -> name}}</td>
+                                   <td> {{ $student->groups?->name_group}}</td>
+                                    <td>
+                                        <input type="text" class="form-control" name="name" style="width: 100%; margin-top: 5px; height: 38px; padding: 6px 12px;">
+                                    </td>
+                                </tr>
+                                <td>
+                                    <form method="POST" action="{{route('student.update', $student->id)}}">
 
+                                        @csrf
+                                        @method('PUT')
+
+                                        <button type="submit">Изменить</button>
+
+                                    </form>
+                                </td>
                             </form>
-                        </form>
-                    @endforeach
+
+                        @endforeach
 
 
-                </div>
+
+                    </table>
+
+
+
+
+
             </div>
         </div>
     </div>
@@ -73,6 +83,22 @@
             color: #92afd1;
             font-size: 18px;
             margin-left: 20px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
     </style>
 @endpush

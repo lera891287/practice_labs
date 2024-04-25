@@ -39,6 +39,19 @@ class EnducationsController extends Controller
         return redirect('http://localhost/all_enducations');
 
     }
+    public function editEnducation()
+    {
+        $enducations = Enducations::all();
+        return view('pages.editEnducations', compact('enducations'));
+
+    }
+    public function updateEnducation(Request $request,$id){
+        $request->validate([
+            'name_disciplins'=> 'required',
+        ]);
+        Enducations::find($id)->update($request->all());
+        return redirect()->route('all_enducations');
+    }
     public function deleteEnducation($id){
         Enducations::destroy($id);
         return redirect('http://localhost/all_enducations');

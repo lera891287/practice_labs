@@ -51,4 +51,8 @@ class Enducations extends Model
     {
         return $this->hasOne(EnducationsStudents::class);
     }
+//    public function studentsEn(): BelongsToMany
+//    {
+//        return $this->belongsToMany(Students::class);
+//    }
 }

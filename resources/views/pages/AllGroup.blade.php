@@ -33,14 +33,7 @@
                         <td>
                             {{ $group -> number }}
                         </td>
-                        <td>
-                            <form method="POST" action="{{route('group.edit', $group->id)  }}">
 
-                                @csrf()
-
-                                <a href="{{route('group.edit', $group->id) }}" class="btn btn-secondary" > Изменить </a>
-                            </form>
-                        </td>
                         <td>
                             <form method="POST" action="{{route('group.destroy' , $group->id )  }}">
                                 @csrf()
@@ -50,9 +43,22 @@
                         </td>
                     </tr>
             @endforeach
+            <tr>
+                <td>
+                    <form method="POST" action="{{route('group.edit', $group->id)  }}">
+
+                        @csrf()
+
+                        <a href="{{route('group.edit', $group->id) }}" class="btn btn-secondary" > Изменить </a>
+                    </form>
+                </td>
+                <td>
+                    <a href="{{route('create.groups') }}" class="btn btn-secondary"> Создать </a>
+                </td>
+            </tr>
         </table>
 
-        <a href="{{route('create.groups') }}" class="btn btn-secondary"> Создать </a>
+
     </div>
 
 

@@ -8,9 +8,6 @@
             <thead class="thead-dark">
             <tr>
                 <th scope="col">Имя студента</th>
-
-
-
             </tr>
             </thead>
 
@@ -21,14 +18,9 @@
                         {{ $student -> name}}
                     </td>
                     <td>{{ $student->groups?->name_group}}</td>
-{{--                    ? $student->groups->name : 'Нет группы' --}}
+
                     <td>
-                        <form method="POST" action="{{route('student.edit', $student->id)  }}">
 
-                            @csrf()
-
-                            <a href="{{route('student.edit', $student->id) }}" class="btn btn-secondary" > Изменить </a>
-                        </form>
                     </td>
                     <td>
                         <form method="POST" action="{{route('student.destroy' , $student->id )  }}">
@@ -37,12 +29,26 @@
                             <button type="submit" class="btn btn-outline-danger">Удалить</button>
                         </form>
                     </td>
+
                 </tr>
             @endforeach
+            <tr>
+                <td>
 
+                        <form method="POST" action="{{route('student.edit', $student->id)  }}">
+
+                            @csrf()
+
+                            <a href="{{route('student.edit', $student->id) }}" class="btn btn-secondary" > Изменить данные</a>
+                        </form>
+
+                </td>
+                <td><a href="{{route('create_students') }}" class="btn btn-secondary"> Создать </a></td>
+            </tr>
         </table>
 
-        <a href="{{route('create_students') }}" class="btn btn-secondary"> Создать </a>
+
+
     </div>
 
 
@@ -69,6 +75,21 @@
             color: #92afd1;
             font-size: 18px;
             margin-left: 20px;
+        }
+        .button-row {
+            display: flex;
+            justify-content: flex-end;
+            padding: 12px;
+        }
+        .button {
+            margin-left: 10px;
+            padding: 6px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
         }
     </style>
 @endpush
